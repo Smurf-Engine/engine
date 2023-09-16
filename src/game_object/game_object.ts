@@ -1,15 +1,24 @@
-interface GameObjectData{
+import Component from "./component";
+
+export interface GameObjectData{
     canvas : HTMLCanvasElement;
     name : string;
+    components : Component[];
 }
 
-export abstract class GameObject{
+export default abstract class GameObject{
     private canvas : HTMLCanvasElement;
     private cx : CanvasRenderingContext2D;
     public name : string;
+    public components : Component[];
     constructor(objData : GameObjectData){
         this.canvas = objData.canvas;
         this.cx = objData.canvas.getContext("2d")!;
         this.name = objData.name;
+        this.components = objData.components;
+    }
+
+    update(){
+        this.components.forEach(comp => comp.update());
     }
 }
