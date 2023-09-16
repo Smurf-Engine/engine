@@ -6,7 +6,7 @@ export interface GameObjectData{
     components : Component[];
 }
 
-export default abstract class GameObject{
+export default class GameObject{
     private canvas : HTMLCanvasElement;
     private cx : CanvasRenderingContext2D;
     public name : string;
