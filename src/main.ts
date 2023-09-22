@@ -24,6 +24,9 @@ onload = () => {
     obj.addComponent<Physics2D>(Physics2D);
     obj.addComponent<CanvasBoxBoundsCollider>(CanvasBoxBoundsCollider);
 
+    var box = obj.getComponent<BoxRenderer>(BoxRenderer)!;
+    box.color = "red";
+
     scene.addGameObject(obj);
     engine.loadScene(scene);
 

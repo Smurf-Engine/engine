@@ -11,7 +11,7 @@ export default class GameObject {
     public canvas: HTMLCanvasElement;
     public cx: CanvasRenderingContext2D;
     public name: string;
-    public readonly components: Component[];
+    private readonly components: Component[];
     public readonly transform : Transform;
     constructor(objData: GameObjectData) {
         this.canvas = objData.canvas;
@@ -33,5 +33,10 @@ export default class GameObject {
         });
         this.components.push(comp);
         return comp;
+    }
+
+    getComponent<T extends Component>(component: typeof Component) : T | undefined{
+        // @ts-ignore
+        return this.components.find(comp => comp instanceof component);
     }
 }
