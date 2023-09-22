@@ -1,4 +1,4 @@
-import { Vector2 } from "../../data/type";
+import { Vector2 } from "../../data/vector2";
 import Component from "../component";
 
 export class Transform extends Component{
