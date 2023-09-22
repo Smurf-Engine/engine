@@ -8,8 +8,8 @@ export interface GameObjectData {
 }
 
 export default class GameObject {
-    private canvas: HTMLCanvasElement;
-    private cx: CanvasRenderingContext2D;
+    public canvas: HTMLCanvasElement;
+    public cx: CanvasRenderingContext2D;
     public name: string;
     public readonly components: Component[];
     public readonly transform : Transform;
