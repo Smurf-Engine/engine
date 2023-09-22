@@ -1,5 +1,6 @@
 import { Scene } from "./engine/scene";
 import { SmurfEngine } from "./engine/smurf_engine"
+import { BoxRenderer } from "./game_object/components/box_renderer";
 import GameObject from "./game_object/game_object";
 
 const canvas = document.querySelector("canvas")!;
@@ -12,13 +13,14 @@ onload = () => {
     const gameObjects: GameObject[] = [];
     var scene = new Scene(gameObjects);
 
-    engine.loadScene(scene);
-
     var obj = new GameObject({
         name: "Box",
         canvas: canvas
     });
 
-    // obj.components.push(component);
     gameObjects.push(obj);
+    
+    obj.addComponent<BoxRenderer>(BoxRenderer);
+
+    engine.loadScene(scene);
 }

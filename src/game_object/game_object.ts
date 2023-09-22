@@ -1,36 +1,37 @@
 import Component from "./component";
 import { Transform } from "./components/transform";
 
-export interface GameObjectData{
-    canvas : HTMLCanvasElement;
-    name : string;
-    components? : Component[];
+export interface GameObjectData {
+    canvas: HTMLCanvasElement;
+    name: string;
+    components?: Component[];
 }
 
-export default class GameObject{
-    private canvas : HTMLCanvasElement;
-    private cx : CanvasRenderingContext2D;
-    public name : string;
-    public readonly components : Component[];
-    public readonly transform;
-    constructor(objData : GameObjectData){
+export default class GameObject {
+    private canvas: HTMLCanvasElement;
+    private cx: CanvasRenderingContext2D;
+    public name: string;
+    public readonly components: Component[];
+    public readonly transform : Transform;
+    constructor(objData: GameObjectData) {
         this.canvas = objData.canvas;
-        this.cx = objData.canvas.getContext("2d")!;
+        this.cx = this.canvas.getContext("2d")!;
         this.name = objData.name;
         this.components = objData.components ?? [];
-        this.transform = new Transform({
-            name: "Transform",
-            gameObject: this,
-            cx: this.cx
-        });
-        this.components.push(this.transform);
+        this.transform = this.addComponent<Transform>(Transform);
     }
 
-    update(){
+    update() {
         this.components.forEach(comp => comp.update());
     }
 
-    addComponent(component : Component){
-        this.components.push(component);
+    addComponent<T extends Component>(component: typeof Component) : T{
+        // @ts-ignore
+        var comp = new component({
+            gameObject: this,
+            cx: this.cx
+        });
+        this.components.push(comp);
+        return comp;
     }
 }
