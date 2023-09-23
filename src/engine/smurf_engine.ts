@@ -7,7 +7,14 @@ export class SmurfEngine {
     private readonly cx : CanvasRenderingContext2D;
     constructor(public canvas: HTMLCanvasElement) {
         this.cx = canvas.getContext("2d")!;
+        this.init();
         this.run();
+    }
+
+    init(){
+        // set some global settings
+        Settings.add("gravity",.15);
+        console.log(Settings);
     }
 
     run = () => {
