@@ -3,8 +3,7 @@ import Component from "../component";
 
 export class Transform extends Component{
     position : Vector2 = new Vector2(0,0);
-    width : number = 0;
-    height : number = 0;
+    size : Vector2 = new Vector2(0,0);
 
     update(): void {}
 

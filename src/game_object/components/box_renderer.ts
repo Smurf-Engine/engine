@@ -5,6 +5,6 @@ export class BoxRenderer extends Component{
 
     update(): void {
         this.cx.fillStyle = this.color;
-        this.cx.fillRect(this.gameObject.transform.X,this.gameObject.transform.Y,this.gameObject.transform.width,this.gameObject.transform.height);
+        this.cx.fillRect(this.gameObject.transform.X,this.gameObject.transform.Y,this.gameObject.transform.size.x,this.gameObject.transform.size.y);
     }
 }

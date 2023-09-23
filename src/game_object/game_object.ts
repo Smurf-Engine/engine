@@ -1,21 +1,22 @@
+import { SmurfEngine } from "../engine/smurf_engine";
 import Component from "./component";
 import { Transform } from "./components/transform";
 
 export interface GameObjectData {
-    canvas: HTMLCanvasElement;
+    engine: SmurfEngine;
     name: string;
     components?: Component[];
 }
 
 export default class GameObject {
-    public canvas: HTMLCanvasElement;
+    public readonly engine: SmurfEngine;
     public cx: CanvasRenderingContext2D;
     public name: string;
     private readonly components: Component[];
     public readonly transform : Transform;
     constructor(objData: GameObjectData) {
-        this.canvas = objData.canvas;
-        this.cx = this.canvas.getContext("2d")!;
+        this.engine = objData.engine;
+        this.cx = this.engine.canvas.getContext("2d")!;
         this.name = objData.name;
         this.components = objData.components ?? [];
         this.transform = this.addComponent<Transform>(Transform);

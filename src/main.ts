@@ -1,3 +1,4 @@
+import { Vector2 } from "./data/vector2";
 import { Scene } from "./engine/scene";
 import { SmurfEngine } from "./engine/smurf_engine"
 import { CanvasBoxBoundsCollider } from "./game_object/components/box_bounds_collider";
@@ -12,14 +13,13 @@ canvas.height = 500;
 
 onload = () => {
     var engine = new SmurfEngine(canvas);
-    var scene = new Scene(canvas);
+    var scene = new Scene();
 
     var obj = new GameObject({
         name: "Box",
-        canvas: canvas
+        engine
     });
-    obj.transform.width = 100;
-    obj.transform.height = 100;
+    obj.transform.size = new Vector2(100,100);
     obj.addComponent<BoxRenderer>(BoxRenderer);
     obj.addComponent<Physics2D>(Physics2D);
     obj.addComponent<CanvasBoxBoundsCollider>(CanvasBoxBoundsCollider);

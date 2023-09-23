@@ -2,7 +2,7 @@ import GameObject from "../game_object/game_object";
 
 export class Scene{
     gameObjects : GameObject[] = [];
-    constructor(public canvas : HTMLCanvasElement){}
+    constructor(){}
 
     render(){
         this.gameObjects.forEach(obj => obj.update());
