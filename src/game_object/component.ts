@@ -13,5 +13,9 @@ export default abstract class Component{
         this.cx = componentData.cx;
     }
 
+    protected get transform(){
+        return this.gameObject.transform;
+    }
+
     abstract update() : void;
 }
