@@ -1,3 +1,4 @@
+import { Input } from "./input_system";
 import { Scene } from "./scene";
 import { Settings } from "./settings";
 
@@ -5,6 +6,7 @@ export class SmurfEngine {
     previousTime = Date.now();
     private scene? : Scene;
     private readonly cx : CanvasRenderingContext2D;
+    readonly input = new Input();
     constructor(public canvas: HTMLCanvasElement) {
         this.cx = canvas.getContext("2d")!;
         this.init();

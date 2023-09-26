@@ -1,6 +1,7 @@
 import { Vector2 } from "./data/vector2";
 import { Scene } from "./engine/scene";
 import { SmurfEngine } from "./engine/smurf_engine"
+import Component from "./game_object/component";
 import { CanvasBoxBoundsCollider } from "./game_object/components/box_bounds_collider";
 import { BoxRenderer } from "./game_object/components/box_renderer";
 import { Physics2D } from "./game_object/components/physics2d";
@@ -46,6 +47,7 @@ onload = () => {
     player.transform.position = new Vector2(100, 100);
     player.addComponent<Physics2D>(Physics2D);
     player.addComponent<CanvasBoxBoundsCollider>(CanvasBoxBoundsCollider);
+    player.addComponent<PlayerMovement>(PlayerMovement);
     let spriteRenderer = player.addComponent<SpriteRenderer>(SpriteRenderer);
     spriteRenderer.constructSpriteFromSource("/player.png");
 
@@ -55,4 +57,18 @@ onload = () => {
     engine.loadScene(scene);
 
     console.log(player);
+}
+
+class PlayerMovement extends Component{
+    update(): void {
+        if (this.input.isPressed("ArrowUp")) {
+            this.gameObject.getComponent<Physics2D>(Physics2D)!.velocity.y = -5;
+        }
+        if (this.input.isPressed("ArrowLeft")) {
+            this.gameObject.getComponent<Physics2D>(Physics2D)!.velocity.x = -5;
+        }
+        if (this.input.isPressed("ArrowRight")) {
+            this.gameObject.getComponent<Physics2D>(Physics2D)!.velocity.x = 5;
+        }
+    }
 }

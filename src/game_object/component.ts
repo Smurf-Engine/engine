@@ -17,5 +17,13 @@ export default abstract class Component{
         return this.gameObject.transform;
     }
 
+    protected get engine(){
+        return this.gameObject.engine;
+    }
+
+    protected get input(){
+        return this.engine.input;
+    }
+
     abstract update() : void;
 }
