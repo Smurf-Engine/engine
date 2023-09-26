@@ -22,6 +22,11 @@ export default class GameObject {
         this.transform = this.addComponent<Transform>(Transform);
     }
 
+    start(){
+        // start all components, called by scene
+        this.components.forEach(comp => comp.start());
+    }
+
     update() {
         this.components.forEach(comp => comp.update());
     }

@@ -51,24 +51,27 @@ onload = () => {
     let spriteRenderer = player.addComponent<SpriteRenderer>(SpriteRenderer);
     spriteRenderer.constructSpriteFromSource("/player.png");
 
-    scene.addGameObject(background);
-    scene.addGameObject(obj);
-    scene.addGameObject(player);
+    scene.addGameObject(background,obj, player);
     engine.loadScene(scene);
 
     console.log(player);
 }
 
 class PlayerMovement extends Component{
+    physics2d! : Physics2D;
+
+    start(): void {
+        this.physics2d = this.gameObject.getComponent<Physics2D>(Physics2D)!;
+    }
     update(): void {
-        if (this.input.isPressed("ArrowUp")) {
-            this.gameObject.getComponent<Physics2D>(Physics2D)!.velocity.y = -5;
+        if (this.input.isPressed("ArrowUp") || this.input.isPressed("Space")) {
+            this.physics2d.velocity.y = -5;
         }
-        if (this.input.isPressed("ArrowLeft")) {
-            this.gameObject.getComponent<Physics2D>(Physics2D)!.velocity.x = -5;
+        if (this.input.isPressed("ArrowLeft") || this.input.isPressed("KeyA")) {
+            this.physics2d.velocity.x = -5;
         }
-        if (this.input.isPressed("ArrowRight")) {
-            this.gameObject.getComponent<Physics2D>(Physics2D)!.velocity.x = 5;
+        if (this.input.isPressed("ArrowRight") || this.input.isPressed("KeyD")) {
+            this.physics2d.velocity.x = 5;
         }
     }
 }
