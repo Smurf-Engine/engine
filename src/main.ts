@@ -27,15 +27,14 @@ onload = () => {
     sp.constructSpriteFromSource("https://img.freepik.com/premium-vector/panorama-landscape-with-green-bushes-trees-against-background-mountains-blue-sky_531666-54.jpg");
 
     // box
-    var obj = new GameObject({
-        name: "Box",
+    var cursor = new GameObject({
+        name: "Cursor",
         engine
     });
-    obj.transform.size = new Vector2(100, 100);
-    obj.addComponent<BoxRenderer>(BoxRenderer);
-    obj.addComponent<Physics2D>(Physics2D);
-    obj.addComponent<CanvasBoxBoundsCollider>(CanvasBoxBoundsCollider);
-    var box = obj.getComponent<BoxRenderer>(BoxRenderer)!;
+    cursor.transform.size = new Vector2(10, 10);
+    cursor.addComponent<BoxRenderer>(BoxRenderer);
+    cursor.addComponent<MouseFollowingBox>(MouseFollowingBox);
+    var box = cursor.getComponent<BoxRenderer>(BoxRenderer)!;
     box.color = "red";
 
     // player
@@ -51,7 +50,7 @@ onload = () => {
     let spriteRenderer = player.addComponent<SpriteRenderer>(SpriteRenderer);
     spriteRenderer.constructSpriteFromSource("/player.png");
 
-    scene.addGameObject(background, obj, player);
+    scene.addGameObject(background, cursor, player);
     engine.loadScene(scene);
 
     console.log(player);
@@ -59,8 +58,8 @@ onload = () => {
 
 class PlayerMovement extends Component {
     physics2d!: Physics2D;
-    spriteLeft = "/player.png";
-    spriteRight = "/player_left.png";
+    spriteLeft = "/player_left.png";
+    spriteRight = "/player.png";
     spriteRenderer!: SpriteRenderer;
 
     start(): void {
@@ -68,7 +67,6 @@ class PlayerMovement extends Component {
         this.spriteRenderer = this.gameObject.getComponent<SpriteRenderer>(SpriteRenderer)!;
     }
     update(): void {
-        console.log(this.physics2d.velocity);
         if (this.input.isPressed("ArrowUp") || this.input.isPressed("Space")) {
             this.physics2d.velocity.y = -5;
         }
@@ -82,5 +80,24 @@ class PlayerMovement extends Component {
         } else {
             this.physics2d.velocity.x = 0;
         }
+    }
+}
+
+class MouseFollowingBox extends Component {
+    boxRenderer!: BoxRenderer;
+
+    start(): void {
+        this.boxRenderer = this.gameObject.getComponent<BoxRenderer>(BoxRenderer)!;
+    }
+    update(): void {
+        this.gameObject.transform.moveTo(this.input.mouseX, this.input.mouseY);
+
+        if (this.input.getMouseKeyDown(0)) {
+            this.gameObject.cx.canvas.style.cursor = "none";
+            this.boxRenderer.color = "pink";
+        } else if (this.input.getMouseKeyDown(2)) {
+            this.boxRenderer.color = "green";
+        }
+
     }
 }
