@@ -4,6 +4,7 @@ import Component from "../component";
 export class Transform extends Component{
     position : Vector2 = new Vector2(0,0);
     size : Vector2 = new Vector2(0,0);
+    zIndex : number = 0;
 
     update(): void {}
 

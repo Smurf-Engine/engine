@@ -13,5 +13,7 @@ export class Scene {
 
     addGameObject(...objs: GameObject[]) : void {
         objs.forEach((obj) => { this.gameObjects.push(obj); obj.start(); });
+        // sort game objects by z index
+        this.gameObjects.sort((a, b) => a.transform.zIndex - b.transform.zIndex);
     }
 }
