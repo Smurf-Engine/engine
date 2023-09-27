@@ -34,4 +34,6 @@ export class Vector2 implements vec2 {
      * Returns the zero vector.
      */
     static get zero() { return new Vector2(0, 0); }
+
+    get array() : [number,number] { return [this.x, this.y]; }
 }
