@@ -1,4 +1,4 @@
-export function autobind<T extends Function>(target: object, propertyKey: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void {
+export function autobind<T extends Function>(_target: object, propertyKey: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void {
     if (!descriptor || (typeof descriptor.value !== 'function')) {
         throw new TypeError(`Only methods can be decorated with @bind. <${propertyKey}> is not a method!`);
     }
