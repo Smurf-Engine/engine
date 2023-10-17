@@ -26,7 +26,6 @@ class PlayerMovement extends Component {
       this.physics2d.velocity.x = 0;
     }
 
-    console.log(this.physics2d.velocity);
   }
 }
 
