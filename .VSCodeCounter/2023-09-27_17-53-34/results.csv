@@ -1,0 +1,16 @@
+"filename", "language", "TypeScript", "comment", "blank", "total"
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\data\autobind.ts", "TypeScript", 17, 0, 1, 18
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\data\vector2.ts", "TypeScript", 18, 16, 5, 39
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\engine\input_system.ts", "TypeScript", 59, 6, 11, 76
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\engine\scene.ts", "TypeScript", 13, 1, 5, 19
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\engine\settings.ts", "TypeScript", 16, 0, 3, 19
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\engine\smurf_engine.ts", "TypeScript", 33, 2, 8, 43
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\game_object\component.ts", "TypeScript", 24, 0, 7, 31
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\game_object\components\box_bounds_collider.ts", "TypeScript", 18, 0, 2, 20
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\game_object\components\box_renderer.ts", "TypeScript", 8, 0, 2, 10
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\game_object\components\physics2d.ts", "TypeScript", 17, 0, 3, 20
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\game_object\components\sprite_renderer.ts", "TypeScript", 12, 0, 3, 15
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\game_object\components\transform.ts", "TypeScript", 22, 0, 6, 28
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\game_object\game_object.ts", "TypeScript", 39, 3, 6, 48
+"c:\Users\siddh\OneDrive\Documents\monorepo\node projects\smurf-engine\src\main.ts", "TypeScript", 28, 80, 18, 126
+"Total", "-", 324, 108, 80, 512
