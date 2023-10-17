@@ -12,6 +12,8 @@ class PlayerMovement extends Component {
   start(): void {
     this.gameObject.getComponent<BoxRenderer>(BoxRenderer)!.color = "white";
     this.physics2d = this.gameObject.getComponent<Physics2D>(Physics2D)!;
+    this.physics2d.useGravity = false;
+    console.log(this);
   }
   update(): void {
     if (this.input.isPressed("ArrowUp") || this.input.isPressed("Space")) {
@@ -47,7 +49,6 @@ player.transform.size = new Vector2(50, 50);
 player.transform.position = new Vector2(100, 100);
 player.addComponent(Physics2D);
 player.addComponent(BoxRenderer);
-player.addComponent(CanvasBoxBoundsCollider);
 player.addComponent(PlayerMovement);
 
 blockWorld.addGameObject(background, player);

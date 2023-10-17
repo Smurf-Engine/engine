@@ -48,7 +48,23 @@ export class SmurfEngine {
   }
 
   clearCanvas() {
-    this.cx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // get all current game objects
+    if (this.scene) {
+      let xArray = this.scene.gameObjects.map(obj => obj.transform.position.x);
+      let yArray = this.scene.gameObjects.map(obj => obj.transform.position.y);
+      let widthArray = this.scene.gameObjects.map(obj => obj.transform.size.x);
+      let heightArray = this.scene.gameObjects.map(obj => obj.transform.size.y);
+      let xMin = Math.min(...xArray);
+      let yMin = Math.min(...yArray);
+      let xMax = Math.max(...xArray);
+      let yMax = Math.max(...yArray);
+      let widthMax = Math.max(...widthArray);
+      let heightMax = Math.max(...heightArray);
+      // clear canvas from min x and y to max x and y
+      this.cx.clearRect(xMin, yMin, xMax + widthMax, yMax + heightMax);
+    } else {
+      this.cx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
   }
 
   loadScene(scene: Scene) {

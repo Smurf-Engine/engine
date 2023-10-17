@@ -8,7 +8,6 @@ export class Physics2D extends Component {
   public useGravity = true;
 
   update(): void {
-    this.gameObject.removeComponent(Physics2D);
     if (this.useGravity) {
       this.addGravity();
     }
