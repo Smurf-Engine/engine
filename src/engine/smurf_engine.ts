@@ -2,6 +2,8 @@ import { Input } from "./input_system";
 import { Scene } from "./scene";
 import { Settings } from "./settings";
 
+export type Type<T> = { new(...args: any[]): T; };
+
 export class SmurfEngine {
   previousTime = Date.now();
   private scene?: Scene;
