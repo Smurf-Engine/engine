@@ -6,13 +6,13 @@ import { BoxRenderer } from "../game_object/components/box_renderer";
 import { Physics2D } from "../game_object/components/physics2d";
 import { CanvasBoxBoundsCollider } from "../game_object/components/box_bounds_collider";
 import Component from "../game_object/component";
+import { Camera } from "../game_object/components/camera";
 
 class PlayerMovement extends Component {
   physics2d!: Physics2D;
   start(): void {
     this.gameObject.getComponent<BoxRenderer>(BoxRenderer)!.color = "white";
     this.physics2d = this.gameObject.getComponent<Physics2D>(Physics2D)!;
-    this.physics2d.useGravity = false;
     console.log(this);
   }
   update(): void {
@@ -33,12 +33,12 @@ class PlayerMovement extends Component {
 
 const blockWorld = new Scene();
 
-const background = new GameObject({
-  name: "Background",
+const mainCamera = new GameObject({
+  name: "Main Camera",
   engine: engine,
 });
-background.transform.size = new Vector2(engine.canvas.width, engine.canvas.height);
-background.addComponent<BoxRenderer>(BoxRenderer).color = "magenta";
+
+let cam = mainCamera.addComponent(Camera);
 
 const player = new GameObject({
   name: "Player",
@@ -49,8 +49,11 @@ player.transform.size = new Vector2(50, 50);
 player.transform.position = new Vector2(100, 100);
 player.addComponent(Physics2D);
 player.addComponent(BoxRenderer);
+player.addComponent(CanvasBoxBoundsCollider);
 player.addComponent(PlayerMovement);
 
-blockWorld.addGameObject(background, player);
+cam.follow = player;
+
+blockWorld.addGameObject(mainCamera, player);
 
 export { blockWorld };

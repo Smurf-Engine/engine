@@ -6,7 +6,8 @@ export type Type<T> = { new(...args: any[]): T; };
 
 export class SmurfEngine {
   previousTime = Date.now();
-  private scene?: Scene;
+  public scene?: Scene;
+  // @ts-ignore
   private readonly cx: CanvasRenderingContext2D;
   readonly input: Input;
   // for fps
@@ -39,32 +40,10 @@ export class SmurfEngine {
     Settings.add('dt', (newTime - this.previousTime) / 1000);
     this.previousTime = newTime;
 
-    // clear and redraw
-    this.clearCanvas();
     this.scene?.render();
 
 
     requestAnimationFrame(this.run);
-  }
-
-  clearCanvas() {
-    // get all current game objects
-    if (this.scene) {
-      let xArray = this.scene.gameObjects.map(obj => obj.transform.position.x);
-      let yArray = this.scene.gameObjects.map(obj => obj.transform.position.y);
-      let widthArray = this.scene.gameObjects.map(obj => obj.transform.size.x);
-      let heightArray = this.scene.gameObjects.map(obj => obj.transform.size.y);
-      let xMin = Math.min(...xArray);
-      let yMin = Math.min(...yArray);
-      let xMax = Math.max(...xArray);
-      let yMax = Math.max(...yArray);
-      let widthMax = Math.max(...widthArray);
-      let heightMax = Math.max(...heightArray);
-      // clear canvas from min x and y to max x and y
-      this.cx.clearRect(xMin, yMin, xMax + widthMax, yMax + heightMax);
-    } else {
-      this.cx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
   }
 
   loadScene(scene: Scene) {
