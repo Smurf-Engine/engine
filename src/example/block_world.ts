@@ -45,6 +45,21 @@ const player = new GameObject({
   engine: engine,
 });
 
+const platforms: GameObject[] = [];
+
+for (let i = 50; i <= 450; i += 150) {
+  let p = new GameObject({
+    name: `GameObject ${i}`,
+    engine
+  });
+  p.transform.position.x = i;
+  p.transform.position.y = Math.random() * 500
+  p.transform.size = new Vector2(100, 10);
+  let b = p.addComponent(BoxRenderer);
+  b.color = "white";
+  platforms.push(p);
+}
+
 player.transform.size = new Vector2(50, 50);
 player.transform.position = new Vector2(100, 100);
 player.addComponent(Physics2D);
@@ -54,6 +69,6 @@ player.addComponent(PlayerMovement);
 
 cam.follow = player;
 
-blockWorld.addGameObject(mainCamera, player);
+blockWorld.addGameObject(mainCamera, player, ...platforms);
 
 export { blockWorld };
