@@ -6,6 +6,8 @@ export class BoxCollider extends Component {
   size!: Vector2;
   isTrigger: boolean = false;
   public drawBounds: boolean = false;
+  isColliding: boolean = false;
+  lastCollision!: BoxCollider;
 
   start(): void {
     this.position = this.gameObject.transform.position;
@@ -38,7 +40,18 @@ export class BoxCollider extends Component {
       if (obj.hasComponent(BoxCollider) && obj !== this.gameObject) {
         let other = obj.getComponent(BoxCollider)!;
         if (this.checkCollisionWith(other)) {
-          console.log("Colliding");
+          // if not already colliding
+          if (!this.isColliding) {
+            this.isColliding = true;
+            this.lastCollision = other;
+            this.gameObject.getAllComponents().map(c => c.onCollisionEnter(obj));
+          }
+        }
+        else {
+          if (this.isColliding && this.lastCollision === other) {
+            this.isColliding = false;
+            this.gameObject.getAllComponents().map(c => c.onCollisionExit(obj));
+          }
         }
       }
     });

@@ -28,7 +28,6 @@ class PlayerMovement extends Component {
     } else {
       this.physics2d.velocity.x = 0;
     }
-
   }
 }
 
@@ -58,7 +57,7 @@ for (let i = 50; i <= 450; i += 150) {
   p.transform.size = new Vector2(100, 10);
   let b = p.addComponent(BoxRenderer);
   b.color = "white";
-  if (i == 50) p.addComponent(BoxCollider);
+  p.addComponent(BoxCollider);
   platforms.push(p);
 }
 

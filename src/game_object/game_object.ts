@@ -55,4 +55,8 @@ export default class GameObject {
     // @ts-ignore
     return this.components.some(comp => comp instanceof component);
   }
+
+  getAllComponents(): Component[] {
+    return this.components;
+  }
 }

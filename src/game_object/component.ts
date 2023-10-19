@@ -28,4 +28,8 @@ export default abstract class Component {
   start() { }
 
   update() { }
+
+  onCollisionEnter(other: GameObject) { }
+
+  onCollisionExit(other: GameObject) { }
 }
