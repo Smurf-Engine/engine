@@ -7,6 +7,7 @@ import { Physics2D } from "../game_object/components/physics2d";
 import { CanvasBoxBoundsCollider } from "../game_object/components/box_bounds_collider";
 import Component from "../game_object/component";
 import { Camera } from "../game_object/components/camera";
+import { BoxCollider } from "../game_object/components/box_collider";
 
 class PlayerMovement extends Component {
   physics2d!: Physics2D;
@@ -64,6 +65,8 @@ player.transform.size = new Vector2(50, 50);
 player.transform.position = new Vector2(100, 100);
 player.addComponent(Physics2D);
 player.addComponent(BoxRenderer);
+player.addComponent(BoxCollider);
+player.getComponent(BoxCollider)!.drawBounds = true;
 player.addComponent(CanvasBoxBoundsCollider);
 player.addComponent(PlayerMovement);
 

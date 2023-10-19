@@ -46,8 +46,13 @@ export default class GameObject {
     this.components = this.components.filter(comp => !(comp instanceof component));
   }
 
-  getComponent<T extends Component>(component: typeof Component): T | undefined {
+  getComponent<T extends Component>(component: Type<T>): T | undefined {
     // @ts-ignore
     return this.components.find(comp => comp instanceof component);
+  }
+
+  hasComponent<T extends Component>(component: Type<T>): boolean {
+    // @ts-ignore
+    return this.components.some(comp => comp instanceof component);
   }
 }
