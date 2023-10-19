@@ -8,7 +8,7 @@ import { blockWorld } from "./example/block_world";
 import { engine } from "./example/setup";
 import spriteExample from "./example/sprite_example";
 import Component from "./game_object/component";
-import { CanvasBoxBoundsCollider } from "./game_object/components/box_bounds_collider";
+import { BoxCollider } from "./game_object/components/box_collider";
 import { BoxRenderer } from "./game_object/components/box_renderer";
 import { Physics2D } from "./game_object/components/physics2d";
 import { SpriteRenderer } from "./game_object/components/sprite_renderer";
@@ -36,7 +36,7 @@ export {
   Physics2D,
   BoxRenderer,
   SpriteRenderer,
-  CanvasBoxBoundsCollider,
   autobind,
   Vector2,
+  BoxCollider,
 };
