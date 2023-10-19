@@ -20,5 +20,27 @@ export class BoxCollider extends Component {
       this.cx.rect(this.position.x, this.position.y, this.size.x, this.size.y);
       this.cx.stroke();
     }
+    this.collisionLoop();
+  }
+
+  checkCollisionWith(other: BoxCollider): boolean {
+    if (this.position.x < other.position.x + other.size.x &&
+      this.position.x + this.size.x > other.position.x &&
+      this.position.y < other.position.y + other.size.y &&
+      this.position.y + this.size.y > other.position.y) {
+      return true;
+    }
+    return false;
+  }
+
+  collisionLoop() {
+    this.engine.scene!.gameObjects.forEach(obj => {
+      if (obj.hasComponent(BoxCollider) && obj !== this.gameObject) {
+        let other = obj.getComponent(BoxCollider)!;
+        if (this.checkCollisionWith(other)) {
+          console.log("Colliding");
+        }
+      }
+    });
   }
 }
