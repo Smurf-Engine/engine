@@ -25,8 +25,7 @@ export class Physics2D extends Component {
     this.useGravity = false;
   }
 
-  onCollisionExit(other: GameObject): void {
-    console.log("No longer colliding with", other.name);
+  onCollisionExit(other?: GameObject): void {
     this.useGravity = true;
   }
 }

@@ -11,7 +11,7 @@ import { BoxCollider } from "../game_object/components/box_collider";
 class PlayerMovement extends Component {
   physics2d!: Physics2D;
   start(): void {
-    this.gameObject.getComponent<BoxRenderer>(BoxRenderer)!.color = "white";
+    // this.gameObject.getComponent<BoxRenderer>(BoxRenderer)!.color = "white";
     this.physics2d = this.gameObject.getComponent<Physics2D>(Physics2D)!;
     console.log(this);
   }
@@ -26,6 +26,12 @@ class PlayerMovement extends Component {
       this.physics2d.velocity.x = 5;
     } else {
       this.physics2d.velocity.x = 0;
+    }
+  }
+
+  onCollisionEnter(other: GameObject): void {
+    if (other.tag === 'platform') {
+      other.destroy();
     }
   }
 }
@@ -51,6 +57,7 @@ for (let i = 50; i <= 450; i += 150) {
     name: `GameObject ${i}`,
     engine
   });
+  p.tag = 'platform';
   p.transform.position.x = i;
   p.transform.position.y = Math.random() * 500
   p.transform.size = new Vector2(100, 10);

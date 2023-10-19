@@ -1,4 +1,5 @@
 import { Type, SmurfEngine } from "../engine/smurf_engine";
+import { Vector2 } from "../main";
 import Component from "./component";
 import { Transform } from "./components/transform";
 
@@ -12,6 +13,7 @@ export default class GameObject {
   public readonly engine: SmurfEngine;
   public cx: CanvasRenderingContext2D;
   public name: string;
+  public tag: string = '';
   private readonly components: Component[];
   public readonly transform: Transform;
   constructor(objData: GameObjectData) {
@@ -29,6 +31,11 @@ export default class GameObject {
 
   update() {
     this.components.forEach(comp => comp.update());
+  }
+
+  get center(): Vector2 {
+    // calculate center of game object
+    return new Vector2(this.transform.position.x + this.transform.size.x / 2, this.transform.position.y + this.transform.size.y / 2);
   }
 
   addComponent<T extends Component>(component: Type<T>): T {
@@ -58,5 +65,10 @@ export default class GameObject {
 
   getAllComponents(): Component[] {
     return this.components;
+  }
+
+  destroy() {
+    this.components.forEach(comp => comp.onDestory());
+    this.engine.scene?.removeGameObject(this);
   }
 }

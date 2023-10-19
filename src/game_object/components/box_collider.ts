@@ -2,17 +2,12 @@ import { Vector2 } from "../../main";
 import Component from "../component";
 
 export class BoxCollider extends Component {
-  position!: Vector2;
-  size!: Vector2;
+  position: Vector2 = this.gameObject.transform.position;
+  size: Vector2 = this.gameObject.transform.size;
   isTrigger: boolean = false;
   public drawBounds: boolean = false;
   isColliding: boolean = false;
-  lastCollision!: BoxCollider;
-
-  start(): void {
-    this.position = this.gameObject.transform.position;
-    this.size = this.gameObject.transform.size;
-  }
+  lastCollision?: BoxCollider;
 
   update(): void {
     if (this.drawBounds) {
@@ -56,4 +51,8 @@ export class BoxCollider extends Component {
       }
     });
   }
+
+  // onDestory(): void {
+  //   this.gameObject.getAllComponents().map(c => c.onCollisionExit(this.lastCollision?.gameObject));
+  // }
 }

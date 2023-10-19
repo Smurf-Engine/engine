@@ -31,5 +31,7 @@ export default abstract class Component {
 
   onCollisionEnter(other: GameObject) { }
 
-  onCollisionExit(other: GameObject) { }
+  onCollisionExit(other?: GameObject) { }
+
+  onDestory() { }
 }
