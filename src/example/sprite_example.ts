@@ -5,7 +5,6 @@ import { Vector2 } from "../data/vector2";
 import { SpriteRenderer } from "../game_object/components/sprite_renderer";
 import { BoxRenderer } from "../game_object/components/box_renderer";
 import { Physics2D } from "../game_object/components/physics2d";
-import { CanvasBoxBoundsCollider } from "../game_object/components/box_bounds_collider";
 import Component from "../game_object/component";
 
 var spriteExample = new Scene();
@@ -37,7 +36,6 @@ var player = new GameObject({
 player.transform.size = new Vector2(100, 100);
 player.transform.position = new Vector2(100, 100);
 player.addComponent<Physics2D>(Physics2D);
-player.addComponent<CanvasBoxBoundsCollider>(CanvasBoxBoundsCollider);
 let spriteRenderer = player.addComponent<SpriteRenderer>(SpriteRenderer);
 spriteRenderer.constructSpriteFromSource("/player.png");
 

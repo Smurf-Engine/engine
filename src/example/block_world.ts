@@ -4,7 +4,6 @@ import GameObject from "../game_object/game_object";
 import { Vector2 } from "../data/vector2";
 import { BoxRenderer } from "../game_object/components/box_renderer";
 import { Physics2D } from "../game_object/components/physics2d";
-import { CanvasBoxBoundsCollider } from "../game_object/components/box_bounds_collider";
 import Component from "../game_object/component";
 import { Camera } from "../game_object/components/camera";
 import { BoxCollider } from "../game_object/components/box_collider";
@@ -67,7 +66,6 @@ player.addComponent(Physics2D);
 player.addComponent(BoxRenderer);
 player.addComponent(BoxCollider);
 player.getComponent(BoxCollider)!.drawBounds = true;
-player.addComponent(CanvasBoxBoundsCollider);
 player.addComponent(PlayerMovement);
 
 cam.follow = player;
