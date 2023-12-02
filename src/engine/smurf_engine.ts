@@ -1,4 +1,6 @@
+import GameObject from "../game_object/game_object";
 import { Input } from "./input_system";
+import MadeWithSmurfScreen from "./made_with_smurf";
 import { Scene } from "./scene";
 import { Settings } from "./settings";
 
@@ -7,6 +9,9 @@ export type Type<T> = { new(...args: any[]): T; };
 export class SmurfEngine {
   previousTime = Date.now();
   public scene?: Scene;
+  public sceneStack: Scene[] = [];
+  // Made with Smurf Screen is the first screen that shows up when the game starts up which enables the user to start the game
+  public isGestureReady = false;
   private isRecordingStream = false;
   private recorder?: MediaRecorder;
   // @ts-ignore
@@ -26,6 +31,15 @@ export class SmurfEngine {
     // set some global settings
     Settings.add("gravity", .15);
     console.log(Settings);
+
+    let startScene = new Scene();
+    let madeWithSmurf = new GameObject({
+      name: "Made With Smurf",
+      engine: this,
+    });
+    madeWithSmurf.addComponent(MadeWithSmurfScreen);
+    startScene.addGameObject(madeWithSmurf);
+    this.scene = startScene;
   }
 
   run = () => {
@@ -42,6 +56,10 @@ export class SmurfEngine {
     Settings.add('dt', (newTime - this.previousTime) / 1000);
     this.previousTime = newTime;
 
+    if (!this.scene?.isAllowedToStay){
+      this.scene = this.sceneStack.pop();
+    }
+
     this.scene?.render();
 
 
@@ -49,7 +67,7 @@ export class SmurfEngine {
   }
 
   loadScene(scene: Scene) {
-    this.scene = scene;
+    this.sceneStack.push(scene);
   }
 
   currentFrameAsURL(callback: (url: string) => void) {
@@ -74,7 +92,7 @@ export class SmurfEngine {
     this.recorder.ondataavailable = function (e) {
       chunks.push(e.data);
     };
-    this.recorder.onstop = function (e) {
+    this.recorder.onstop = function () {
       let blob = new Blob(chunks, { type: "video/mp4" });
       let url = URL.createObjectURL(blob);
       callback(url);

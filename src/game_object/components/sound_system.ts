@@ -14,7 +14,6 @@ export class SoundSystem extends Component{
         if(this.autoplay){
             this.audio.play();
         }
-        console.log(this);
     }
     
     play(){

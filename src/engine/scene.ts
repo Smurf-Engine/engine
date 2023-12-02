@@ -1,6 +1,7 @@
 import GameObject from "../game_object/game_object";
 
 export class Scene {
+  public isAllowedToStay = true;
   readonly gameObjects: GameObject[] = [];
 
   render() {
