@@ -10,6 +10,8 @@ export class BoxCollider extends Component {
   lastCollision?: BoxCollider;
 
   update(): void {
+    this.position = this.gameObject.transform.position;
+    this.size = this.gameObject.transform.size;
     if (this.drawBounds) {
       this.cx.beginPath();
       this.cx.strokeStyle = "red";

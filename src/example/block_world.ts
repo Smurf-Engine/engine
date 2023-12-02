@@ -7,6 +7,7 @@ import { Physics2D } from "../game_object/components/physics2d";
 import Component from "../game_object/component";
 import { Camera } from "../game_object/components/camera";
 import { BoxCollider } from "../game_object/components/box_collider";
+import { SoundSystem } from "../game_object/components/sound_system";
 
 class PlayerMovement extends Component {
   physics2d!: Physics2D;
@@ -31,7 +32,8 @@ class PlayerMovement extends Component {
 
   onCollisionEnter(other: GameObject): void {
     if (other.tag === 'platform') {
-      other.destroy();
+      // other.destroy();
+      // this.physics2d.onCollisionExit();
     }
   }
 }

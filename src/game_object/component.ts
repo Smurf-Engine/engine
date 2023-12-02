@@ -29,8 +29,10 @@ export default abstract class Component {
 
   update() { }
 
+  // @ts-ignore
   onCollisionEnter(other: GameObject) { }
 
+  // @ts-ignore
   onCollisionExit(other?: GameObject) { }
 
   onDestory() { }
