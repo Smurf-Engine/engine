@@ -12,6 +12,10 @@ export class Camera extends Component {
     height: this.engine.canvas.height
   };
 
+  start(): void {
+    console.log(this);
+  }
+
   update() {
     this.clearCanvas();
     // if (this.follow) {
@@ -51,6 +55,14 @@ export class Camera extends Component {
     // clear canvas from min x and y to max x and y
     this.cx.fillStyle = this.backgroundColor;
     this.cx.fillRect(xMin, yMin, xMax + widthMax, yMax + heightMax);
+  }
 
+  currentFrameAsURL(callback: (url: string) => void) {
+    this.cx.canvas.toBlob(function (blob) {
+      if (blob) {
+        let url = URL.createObjectURL(blob);
+        callback(url);
+      }
+    }, "image/png", 1.0);
   }
 }

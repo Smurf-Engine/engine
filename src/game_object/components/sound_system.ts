@@ -14,6 +14,7 @@ export class SoundSystem extends Component{
         if(this.autoplay){
             this.audio.play();
         }
+        console.log(this);
     }
     
     play(){
@@ -36,5 +37,9 @@ export class SoundSystem extends Component{
 
     setDuration(duration : number){
         this.audio.currentTime = duration;
+    }
+
+    onDestory(): void {
+        
     }
 }

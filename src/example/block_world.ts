@@ -31,6 +31,7 @@ class PlayerMovement extends Component {
   }
 
   onCollisionEnter(other: GameObject): void {
+    this.gameObject.getComponent(SoundSystem)!.play();
     if (other.tag === 'platform') {
       // other.destroy();
       // this.physics2d.onCollisionExit();
@@ -76,6 +77,8 @@ player.addComponent(BoxRenderer);
 player.addComponent(BoxCollider);
 player.getComponent(BoxCollider)!.drawBounds = true;
 player.addComponent(PlayerMovement);
+player.addComponent(SoundSystem).source = "https://www.w3schools.com/html/horse.ogg";
+player.getComponent(SoundSystem)!.volume = 0.1;
 
 cam.follow = player;
 
