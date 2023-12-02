@@ -5,18 +5,12 @@ export class Camera extends Component {
   public backgroundColor = "black";
   public zoom = 1;
   public follow?: GameObject;
-  private isRecordingStream = false;
-  private recorder?: MediaRecorder;
   public viewport = {
     x: 0,
     y: 0,
     width: this.engine.canvas.width,
     height: this.engine.canvas.height
   };
-
-  start(): void {
-    console.log(this);
-  }
 
   update() {
     this.clearCanvas();
@@ -57,43 +51,5 @@ export class Camera extends Component {
     // clear canvas from min x and y to max x and y
     this.cx.fillStyle = this.backgroundColor;
     this.cx.fillRect(xMin, yMin, xMax + widthMax, yMax + heightMax);
-  }
-
-  currentFrameAsURL(callback: (url: string) => void) {
-    this.cx.canvas.toBlob(function (blob) {
-      if (blob) {
-        let url = URL.createObjectURL(blob);
-        callback(url);
-      }
-    }, "image/png", 1.0);
-  }
-
-  startRecordingStream(callback: (url: string) => void) {
-    if (this.isRecordingStream) {
-      return;
-    }
-    this.isRecordingStream = true;
-    let stream = this.cx.canvas.captureStream(60);
-    // TODO: add audio context in engine and add audio tracks to stream
-    // stream.addTrack(this.engine.audioContext.createMediaStreamDestination().stream.getAudioTracks()[0]);
-    this.recorder = new MediaRecorder(stream);
-    let chunks: Blob[] = [];
-    this.recorder.ondataavailable = function (e) {
-      chunks.push(e.data);
-    };
-    this.recorder.onstop = function (e) {
-      let blob = new Blob(chunks, { type: "video/mp4" });
-      let url = URL.createObjectURL(blob);
-      callback(url);
-    };
-    this.recorder.start();
-  }
-
-  stopRecordingStream() {
-    if (!this.isRecordingStream) {
-      return;
-    }
-    this.isRecordingStream = false;
-    this.recorder!.stop();
   }
 }
