@@ -6,6 +6,11 @@ export class Scene {
 
   render() {
     this.gameObjects.forEach(obj => obj.update());
+
+    if (!this.isAllowedToStay) {
+      console.log("destroying scene");
+      this.gameObjects.forEach(obj => obj.destroy());
+    }
   }
 
   addGameObject(obj: GameObject): void;
@@ -18,6 +23,7 @@ export class Scene {
     this.gameObjects.sort((a, b) => a.transform.zIndex - b.transform.zIndex);
   }
 
+  // CAUTION: only to be called by game object
   removeGameObject(obj: GameObject) {
     this.gameObjects.splice(this.gameObjects.indexOf(obj), 1);
   }

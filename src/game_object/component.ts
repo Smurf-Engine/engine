@@ -25,6 +25,8 @@ export default abstract class Component {
     return this.engine.input;
   }
 
+  onFirstUpdate() { }
+
   start() { }
 
   update() { }

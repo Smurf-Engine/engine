@@ -8,6 +8,9 @@ class MadeWithSmurfScreen extends Component{
         this.transform.position.y = 0;
         this.transform.size.x = this.cx.canvas.width;
         this.transform.size.y = this.cx.canvas.height;
+
+        // set UI layer to transparent
+        this.engine.UIContainer.style.pointerEvents = "none";
     }
 
     update(): void {
@@ -36,6 +39,11 @@ class MadeWithSmurfScreen extends Component{
                 this.engine.scene!.isAllowedToStay = false;
             }
         }
+    }
+
+    onDestory(): void {
+        // set UI layer to visible
+        this.engine.UIContainer.style.pointerEvents = "auto";
     }
 }
 

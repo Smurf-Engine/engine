@@ -8,6 +8,67 @@ import Component from "../game_object/component";
 import { Camera } from "../game_object/components/camera";
 import { BoxCollider } from "../game_object/components/box_collider";
 import { SoundSystem } from "../game_object/components/sound_system";
+import DOMUILayer from "../game_object/components/dom_ui_layer";
+
+const startGameScene = new Scene();
+
+const startGame = new GameObject({
+  name: "UI",
+  engine: engine,
+});
+
+class StartGame extends Component {
+  ui = this.gameObject.getComponent(DOMUILayer)!;
+  onFirstUpdate(): void {
+    this.createUI();
+  }
+
+  createUI(){
+    // start button small on left
+    let startButton = document.createElement("button");
+    startButton.innerText = "Start";
+    startButton.style.marginTop = "100px";
+    startButton.style.marginLeft = "50px";
+    startButton.style.fontSize = "25px";
+    startButton.style.backgroundColor = "white";
+    startButton.style.color = "black";
+    startButton.style.borderRadius = "10px";
+    startButton.style.border = "none";
+    startButton.style.padding = "10px";
+    startButton.style.cursor = "pointer";
+    startButton.style.outline = "none";
+    startButton.onclick = () => {
+      this.engine.scene!.isAllowedToStay = false;
+      engine.loadScene(blockWorld);
+    }
+
+    // options button small on left
+    let optionsButton = document.createElement("button");
+    optionsButton.style.display = "block";
+    optionsButton.innerText = "Options";
+    optionsButton.style.marginTop = "10px";
+    optionsButton.style.marginLeft = "50px";
+    optionsButton.style.fontSize = "25px";
+    optionsButton.style.backgroundColor = "white";
+    optionsButton.style.color = "black";
+    optionsButton.style.borderRadius = "10px";
+    optionsButton.style.border = "none";
+    optionsButton.style.padding = "10px";
+    optionsButton.style.cursor = "pointer";
+    optionsButton.style.outline = "none";
+    optionsButton.onclick = () => {
+      alert("Options");
+    }
+    this.ui.addElement(startButton, "opaque");
+    this.ui.addElement(optionsButton, "opaque");
+
+    this.ui.setLayerHitBehavior("opaque");
+  }
+
+}
+startGame.addComponent(DOMUILayer);
+startGame.addComponent(StartGame);
+startGameScene.addGameObject(startGame);
 
 class PlayerMovement extends Component {
   physics2d!: Physics2D;
@@ -55,6 +116,7 @@ const player = new GameObject({
 
 const platforms: GameObject[] = [];
 
+
 for (let i = 50; i <= 450; i += 150) {
   let p = new GameObject({
     name: `GameObject ${i}`,
@@ -84,4 +146,4 @@ cam.follow = player;
 
 blockWorld.addGameObject(mainCamera, player, ...platforms);
 
-export { blockWorld };
+export { startGameScene };

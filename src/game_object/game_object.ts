@@ -16,6 +16,7 @@ export default class GameObject {
   public tag: string = '';
   private readonly components: Component[];
   public readonly transform: Transform;
+  private _isFirstUpdate = true;
   constructor(objData: GameObjectData) {
     this.engine = objData.engine;
     this.cx = this.engine.canvas.getContext("2d")!;
@@ -30,6 +31,11 @@ export default class GameObject {
   }
 
   update() {
+    if (this._isFirstUpdate) {
+      this._isFirstUpdate = false;
+      this.components.forEach(comp => comp.onFirstUpdate());
+    }
+    // update all components, called by scene
     this.components.forEach(comp => comp.update());
   }
 
@@ -49,6 +55,8 @@ export default class GameObject {
   }
 
   removeComponent<T extends Component>(component: Type<T>): void {
+    // destroy component
+    this.getComponent(component)?.onDestory();
     // @ts-ignore
     this.components = this.components.filter(comp => !(comp instanceof component));
   }
