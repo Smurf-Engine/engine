@@ -52,4 +52,9 @@ export class Camera extends Component {
     this.cx.fillStyle = this.backgroundColor;
     this.cx.fillRect(xMin, yMin, xMax + widthMax, yMax + heightMax);
   }
+
+  onDestory(): void {
+    // clear the last frame of the camera before it is destroyed
+    this.clearCanvas();
+  }
 }

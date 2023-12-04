@@ -8,7 +8,6 @@ export class Scene {
     this.gameObjects.forEach(obj => obj.update());
 
     if (!this.isAllowedToStay) {
-      console.log("destroying scene");
       this.gameObjects.forEach(obj => obj.destroy());
     }
   }

@@ -70,12 +70,75 @@ startGame.addComponent(DOMUILayer);
 startGame.addComponent(StartGame);
 startGameScene.addGameObject(startGame);
 
+const gameOverScene = new Scene();
+
+const gameOver = new GameObject({
+  name: "UI",
+  engine: engine,
+});
+
+class GameOver extends Component {
+  ui = this.gameObject.getComponent(DOMUILayer)!;
+  onFirstUpdate(): void {
+    this.createUI();
+  }
+
+  createUI(){
+    // start button small on left
+    let startButton = document.createElement("button");
+    startButton.innerText = "Restart";
+    startButton.style.marginTop = "100px";
+    startButton.style.marginLeft = "50px";
+    startButton.style.fontSize = "25px";
+    startButton.style.backgroundColor = "white";
+    startButton.style.color = "black";
+    startButton.style.borderRadius = "10px";
+    startButton.style.border = "none";
+    startButton.style.padding = "10px";
+    startButton.style.cursor = "pointer";
+    startButton.style.outline = "none";
+    startButton.onclick = () => {
+      this.engine.scene!.isAllowedToStay = false;
+      engine.loadScene(blockWorld);
+    }
+
+    // options button small on left
+    let optionsButton = document.createElement("button");
+    optionsButton.style.display = "block";
+    optionsButton.innerText = "Main Menu";
+    optionsButton.style.marginTop = "10px";
+    optionsButton.style.marginLeft = "50px";
+    optionsButton.style.fontSize = "25px";
+    optionsButton.style.backgroundColor = "white";
+    optionsButton.style.color = "black";
+    optionsButton.style.borderRadius = "10px";
+    optionsButton.style.border = "none";
+    optionsButton.style.padding = "10px";
+    optionsButton.style.cursor = "pointer";
+    optionsButton.style.outline = "none";
+    optionsButton.onclick = () => {
+      console.log(engine.sceneStack);
+      console.log(engine.scene);
+      console.log(startGameScene);
+      this.engine.scene!.isAllowedToStay = false;
+      engine.loadScene(startGameScene);
+    }
+    this.ui.addElement(startButton, "opaque");
+    this.ui.addElement(optionsButton, "opaque");
+
+    this.ui.setLayerHitBehavior("opaque");
+  }
+}
+
+gameOver.addComponent(DOMUILayer);
+gameOver.addComponent(GameOver);
+gameOverScene.addGameObject(gameOver);
+
 class PlayerMovement extends Component {
   physics2d!: Physics2D;
   start(): void {
     // this.gameObject.getComponent<BoxRenderer>(BoxRenderer)!.color = "white";
     this.physics2d = this.gameObject.getComponent<Physics2D>(Physics2D)!;
-    console.log(this);
   }
   update(): void {
     if (this.input.isPressed("ArrowUp") || this.input.isPressed("Space")) {
@@ -88,6 +151,11 @@ class PlayerMovement extends Component {
       this.physics2d.velocity.x = 5;
     } else {
       this.physics2d.velocity.x = 0;
+    }
+
+    if (this.gameObject.transform.position.y > 600) {
+      this.engine.scene!.isAllowedToStay = false;
+      engine.loadScene(gameOverScene);
     }
   }
 

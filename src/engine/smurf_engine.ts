@@ -34,7 +34,6 @@ export class SmurfEngine {
   init() {
     // set some global settings
     Settings.add("gravity", .15);
-    console.log(Settings);
 
     // init UI container
     this.initUIContainer();
@@ -78,7 +77,7 @@ export class SmurfEngine {
     this.previousTime = newTime;
 
     this.scene?.render();
-    
+
     if (!this.scene?.isAllowedToStay){
       this.scene = this.sceneStack.pop();
     }
@@ -89,6 +88,7 @@ export class SmurfEngine {
   }
 
   loadScene(scene: Scene) {
+    scene.isAllowedToStay = true;
     this.sceneStack.push(scene);
   }
 
