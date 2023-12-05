@@ -39,11 +39,6 @@ export default class GameObject {
     this.components.forEach(comp => comp.update());
   }
 
-  get center(): Vector2 {
-    // calculate center of game object
-    return new Vector2(this.transform.position.x + this.transform.size.x / 2, this.transform.position.y + this.transform.size.y / 2);
-  }
-
   addComponent<T extends Component>(component: Type<T>): T {
     // @ts-ignore
     var comp = new component({

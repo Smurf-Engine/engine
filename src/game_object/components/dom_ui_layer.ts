@@ -8,7 +8,7 @@ export default class DOMUILayer extends Component {
         this.layer.id = this.layerId;
         this.layer.style.width = "100%";
         this.layer.style.height = "100%";
-        this.layer.style.pointerEvents = "none";
+        this.layer.style.pointerEvents = "auto";
         this.engine.UIContainer.appendChild(this.layer);
     }
 

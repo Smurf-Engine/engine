@@ -6,6 +6,8 @@ import { SpriteRenderer } from "../game_object/components/sprite_renderer";
 import { BoxRenderer } from "../game_object/components/box_renderer";
 import { Physics2D } from "../game_object/components/physics2d";
 import Component from "../game_object/component";
+import SpriteSheetAnimator from "../game_object/components/sprite_sheet_animator";
+import { BoxCollider } from "../game_object/components/box_collider";
 
 var spriteExample = new Scene();
 
@@ -36,9 +38,74 @@ var player = new GameObject({
 player.transform.size = new Vector2(100, 100);
 player.transform.position = new Vector2(100, 100);
 player.addComponent<Physics2D>(Physics2D);
+player.addComponent<BoxCollider>(BoxCollider).drawBounds = true;
 let spriteRenderer = player.addComponent<SpriteRenderer>(SpriteRenderer);
 spriteRenderer.constructSpriteFromSource("/player.png");
 
+const coin = new GameObject({
+  name: "Coin",
+  engine
+});
+
+coin.transform.size = new Vector2(25, 25);
+coin.transform.position = new Vector2(400, 100);
+
+let spr = coin.addComponent<SpriteRenderer>(SpriteRenderer);
+spr.constructSpriteFromSource("/coin/image 1.png");
+spr.useNaturalSize = true;
+spr.scale = new Vector2(.1, .1);
+coin.addComponent(SpriteSheetAnimator).sprites = [
+  "/coin/image 1.png",
+  "/coin/image 2.png",
+  "/coin/image 3.png",
+  "/coin/image 4.png",
+  "/coin/image 5.png",
+  "/coin/image 6.png",
+  "/coin/image 7.png",
+  "/coin/image 8.png",
+  "/coin/image 9.png",
+  "/coin/image 10.png",
+  "/coin/image 11.png",
+  "/coin/image 12.png",
+  "/coin/image 13.png",
+  "/coin/image 14.png",
+  "/coin/image 15.png",
+  "/coin/image 16.png",
+];
+
+coin.addComponent(BoxCollider).drawBounds = true;
+
+const water = new GameObject({
+  name: "Water",
+  engine
+});
+water.transform.zIndex = 1;
+
+water.transform.size = new Vector2(700, 150);
+water.transform.position = new Vector2(0, 350);
+
+water.addComponent<SpriteRenderer>(SpriteRenderer).constructSpriteFromSource("/water/image 1.png");
+let animator = water.addComponent(SpriteSheetAnimator);
+animator.sprites = [
+  "/water/image 1.png",
+  "/water/image 2.png",
+  "/water/image 3.png",
+  "/water/image 4.png",
+  "/water/image 5.png",
+  "/water/image 6.png",
+  "/water/image 7.png",
+  "/water/image 8.png",
+  "/water/image 9.png",
+  "/water/image 10.png",
+  "/water/image 11.png",
+  "/water/image 12.png",
+  "/water/image 13.png",
+  "/water/image 14.png",
+  "/water/image 15.png",
+  "/water/image 16.png",
+  "/water/image 17.png",
+];
+animator.pauseDurationInSeconds = 0;
 
 class PlayerMovement extends Component {
   physics2d!: Physics2D;
@@ -90,6 +157,6 @@ class MouseFollowingBox extends Component {
 cursor.addComponent<MouseFollowingBox>(MouseFollowingBox);
 player.addComponent<PlayerMovement>(PlayerMovement);
 
-spriteExample.addGameObject(background, cursor, player);
+spriteExample.addGameObject(background, cursor, player, coin, water);
 
 export default spriteExample;

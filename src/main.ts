@@ -6,7 +6,7 @@ import { Scene } from "./engine/scene";
 import { Settings } from "./engine/settings";
 import { SmurfEngine } from "./engine/smurf_engine"
 import { UniqueIdGenerator } from "./engine/uid";
-import { startGameScene } from "./example/block_world";
+// import { startGameScene } from "./example/block_world";
 import { engine } from "./example/setup";
 import spriteExample from "./example/sprite_example";
 import Component from "./game_object/component";
@@ -23,7 +23,7 @@ import GameObject from "./game_object/game_object";
 
 
 onload = () => {
-  engine.loadScene(startGameScene);
+  engine.loadScene(spriteExample);
 }
 
 // library export

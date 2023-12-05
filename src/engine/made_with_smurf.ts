@@ -43,7 +43,7 @@ class MadeWithSmurfScreen extends Component{
 
     onDestory(): void {
         // set UI layer to visible
-        this.engine.UIContainer.style.pointerEvents = "auto";
+        this.engine.UIContainer.style.pointerEvents = "none";
     }
 }
 
