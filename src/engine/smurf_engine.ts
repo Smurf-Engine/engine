@@ -1,4 +1,6 @@
+import DOMUILayer from "../game_object/components/dom_ui_layer";
 import GameObject from "../game_object/game_object";
+import { AssetPipeline } from "./asset_pipeline";
 import { Input } from "./input_system";
 import MadeWithSmurfScreen from "./made_with_smurf";
 import { Scene } from "./scene";
@@ -19,6 +21,7 @@ export class SmurfEngine {
   private readonly cx: CanvasRenderingContext2D;
   readonly input: Input;
   readonly uid = new UniqueIdGenerator();
+  readonly assetPipeline = new AssetPipeline();
   readonly UIContainer = document.createElement("div");
   // for fps
   private previousTime = Date.now();
@@ -43,6 +46,7 @@ export class SmurfEngine {
       name: "Made With Smurf",
       engine: this,
     });
+    madeWithSmurf.addComponent(DOMUILayer);
     madeWithSmurf.addComponent(MadeWithSmurfScreen);
     startScene.addGameObject(madeWithSmurf);
     this.scene = startScene;

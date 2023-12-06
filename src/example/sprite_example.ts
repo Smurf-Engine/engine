@@ -9,6 +9,44 @@ import Component from "../game_object/component";
 import SpriteSheetAnimator from "../game_object/components/sprite_sheet_animator";
 import { BoxCollider } from "../game_object/components/box_collider";
 
+engine.assetPipeline.addToLoad(
+  "/coin/image 1.png",
+  "/coin/image 2.png",
+  "/coin/image 3.png",
+  "/coin/image 4.png",
+  "/coin/image 5.png",
+  "/coin/image 6.png",
+  "/coin/image 7.png",
+  "/coin/image 8.png",
+  "/coin/image 9.png",
+  "/coin/image 10.png",
+  "/coin/image 11.png",
+  "/coin/image 12.png",
+  "/coin/image 13.png",
+  "/coin/image 14.png",
+  "/coin/image 15.png",
+  "/coin/image 16.png",
+  "https://img.freepik.com/premium-vector/panorama-landscape-with-green-bushes-trees-against-background-mountains-blue-sky_531666-54.jpg",
+  "/player.png",
+  "/water/image 1.png",
+  "/water/image 2.png",
+  "/water/image 3.png",
+  "/water/image 4.png",
+  "/water/image 5.png",
+  "/water/image 6.png",
+  "/water/image 7.png",
+  "/water/image 8.png",
+  "/water/image 9.png",
+  "/water/image 10.png",
+  "/water/image 11.png",
+  "/water/image 12.png",
+  "/water/image 13.png",
+  "/water/image 14.png",
+  "/water/image 15.png",
+  "/water/image 16.png",
+  "/water/image 17.png",
+);
+
 var spriteExample = new Scene();
 
 let background = new GameObject({
