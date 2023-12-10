@@ -1,5 +1,4 @@
 import { Type, SmurfEngine } from "../engine/smurf_engine";
-import { Vector2 } from "../main";
 import Component from "./component";
 import { Transform } from "./components/transform";
 

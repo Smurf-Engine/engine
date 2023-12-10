@@ -27,7 +27,7 @@ export default class SpriteSheetAnimator extends Component {
                 this.currentSpriteIndex = 0;
                 this.framesSinceLastSpriteChange = -this.pauseDurationAfterAnimation;
             }
-            this.spriteRenderer.constructSpriteFromSource(this.sprites[this.currentSpriteIndex]);
+            this.spriteRenderer.sprite!.src = this.sprites[this.currentSpriteIndex];
         }
     }
 }
