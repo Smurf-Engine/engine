@@ -35,5 +35,19 @@ export class Vector2 implements vec2 {
      */
     static get zero() { return new Vector2(0, 0); }
 
-    get array() : [number,number] { return [this.x, this.y]; }
+    get array(): [number, number] { return [this.x, this.y]; }
+
+    add(other: vec2): void {
+        this.x += other.x;
+        this.y += other.y;
+    }
+
+    subtract(other: vec2): void {
+        this.x -= other.x;
+        this.y -= other.y;
+    }
+
+    clone(): Vector2 {
+        return new Vector2(this.x, this.y);
+    }
 }

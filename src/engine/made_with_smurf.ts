@@ -64,6 +64,8 @@ class MadeWithSmurfScreen extends Component {
             } else {
                 this.alpha -= 0.01;
                 if (this.alpha <= 0) {
+                    // TODO: bug this particular scene's game objects are not being destroyed (i.e) on destory is not being called
+                    this.gameObject.destroy();
                     this.engine.scene!.isAllowedToStay = false;
                 }
             }
@@ -74,8 +76,6 @@ class MadeWithSmurfScreen extends Component {
                 this.progressElement.style.display = "none";
             }
         }
-
-
     }
 
     onDestory(): void {

@@ -3,6 +3,7 @@ import Component from "../component";
 
 export class BoxCollider extends Component {
   position: Vector2 = this.gameObject.transform.position;
+  positionOffset: Vector2 = new Vector2(0, 0);
   size: Vector2 = this.gameObject.transform.size;
   isTrigger: boolean = false;
   public drawBounds: boolean = false;
@@ -11,6 +12,7 @@ export class BoxCollider extends Component {
 
   update(): void {
     this.position = this.gameObject.transform.position;
+    this.position.add(this.positionOffset);
     this.size = this.gameObject.transform.size;
     if (this.drawBounds) {
       this.cx.beginPath();
