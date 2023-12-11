@@ -16,6 +16,7 @@ export default class GameObject {
   private readonly components: Component[];
   public readonly transform: Transform;
   private _isFirstUpdate = true;
+  private _isActive = true;
   constructor(objData: GameObjectData) {
     this.engine = objData.engine;
     this.cx = this.engine.canvas.getContext("2d")!;
@@ -30,12 +31,21 @@ export default class GameObject {
   }
 
   update() {
+    if (!this._isActive) return;
     if (this._isFirstUpdate) {
       this._isFirstUpdate = false;
       this.components.forEach(comp => comp.onFirstUpdate());
     }
     // update all components, called by scene
     this.components.forEach(comp => comp.update());
+  }
+
+  public get isActive(): boolean {
+    return this._isActive;
+  }
+
+  public set isActive(value: boolean) {
+    this._isActive = value;
   }
 
   addComponent<T extends Component>(component: Type<T>): T {

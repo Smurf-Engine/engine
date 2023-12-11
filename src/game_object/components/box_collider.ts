@@ -11,7 +11,7 @@ export class BoxCollider extends Component {
   lastCollision?: BoxCollider;
 
   update(): void {
-    this.position = this.gameObject.transform.position;
+    this.position = this.gameObject.transform.position.clone();
     this.position.add(this.positionOffset);
     this.size = this.gameObject.transform.size;
     if (this.drawBounds) {
