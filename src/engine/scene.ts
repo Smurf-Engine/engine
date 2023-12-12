@@ -22,6 +22,10 @@ export class Scene {
     return this.gameObjects.filter(obj => obj.name === name);
   }
 
+  getAllGameObjects(): GameObject[] {
+    return this.gameObjects;
+  }
+
   addGameObject(obj: GameObject): void;
 
   addGameObject(...objs: GameObject[]): void;

@@ -17,6 +17,7 @@ export default class GameObject {
   public readonly transform: Transform;
   private _isFirstUpdate = true;
   private _isActive = true;
+  public isStatic = false;
   constructor(objData: GameObjectData) {
     this.engine = objData.engine;
     this.cx = this.engine.canvas.getContext("2d")!;
