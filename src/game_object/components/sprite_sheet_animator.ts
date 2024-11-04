@@ -11,6 +11,8 @@ export default class SpriteSheetAnimator extends Component {
     private currentSpriteIndex = 0;
     // how many frames have passed since the last sprite change
     private framesSinceLastSpriteChange = 0;
+    isPlaying = true;
+    loop = true;
 
 
     start(): void {
@@ -19,15 +21,24 @@ export default class SpriteSheetAnimator extends Component {
     }
 
     update(): void {
+        if (!this.isPlaying) return;
         this.framesSinceLastSpriteChange++;
         if (this.framesSinceLastSpriteChange >= this.framesPerSecond) {
             this.framesSinceLastSpriteChange = 0;
             this.currentSpriteIndex++;
             if (this.currentSpriteIndex >= this.sprites.length) {
+                if (!this.loop) {
+                    this.isPlaying = false;
+                    return;
+                }
                 this.currentSpriteIndex = 0;
                 this.framesSinceLastSpriteChange = -this.pauseDurationAfterAnimation;
             }
             this.spriteRenderer.sprite!.src = this.sprites[this.currentSpriteIndex];
         }
+    }
+
+    play() {
+        this.isPlaying = true;
     }
 }
